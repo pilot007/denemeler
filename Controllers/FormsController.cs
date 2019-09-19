@@ -14,13 +14,13 @@ namespace WebApplication.Controllers
         public PartialViewResult StudentCreateView()
         {
             Student sx = new Student();
-
+            int id = int.Parse(Session["studentId"].ToString());
             using (var context = new testEntities())
             {
 
                sx = (from b in context.Students
-                         where b.Id == 29
-                         select b ).FirstOrDefault();
+                         where b.Id == id
+                     select b ).FirstOrDefault();
 
             }
             return PartialView("StudentCreateView", sx);
@@ -55,35 +55,36 @@ namespace WebApplication.Controllers
 
         public ActionResult General(int studentId )
         {
-            /*            Entities1 ee = new Entities1();
-                        Student ss = new Student
-                        {
-                            Id = 1,
-                            Active = true,
-                            StudentName = "test",
-                            StudentSurName = "testSurname",
-                            Adres="",
-                            StudentPapier=true,
-                            StudentPrice=0,
-                            StudentRestPrice=0,
-                            StudentExtraInfo="",
-                            StudentBirthDate=""
-                        };
-                        ee.Students.Add(ss);
-                        ee.SaveChanges();
-                        var std = ee.Students.Find();
+            Session["studentId"]= studentId;
+             /*            Entities1 ee = new Entities1();
+                         Student ss = new Student
+                         {
+                             Id = 1,
+                             Active = true,
+                             StudentName = "test",
+                             StudentSurName = "testSurname",
+                             Adres="",
+                             StudentPapier=true,
+                             StudentPrice=0,
+                             StudentRestPrice=0,
+                             StudentExtraInfo="",
+                             StudentBirthDate=""
+                         };
+                         ee.Students.Add(ss);
+                         ee.SaveChanges();
+                         var std = ee.Students.Find();
 
-                         */
+                          */
 
-            /*
-            var std = new Models.Student { Id = 1, Email = "test1@test.com", studentName = "STEFFY 1", studentSurName = "XYZ1" };
-            var pymts = new List<Models.Student_Payments>();
-            pymts.Add(new Models.Student_Payments { Id=1,Payment=100, date="1.1.2001"});
-            pymts.Add(new Models.Student_Payments { Id = 2, Payment = 102, date = "1.1.2001" });
-            pymts.Add(new Models.Student_Payments { Id = 3, Payment = 103, date = "1.1.2001" });
-            std.payments=pymts.ToArray();
-            */
-            testEntities ee = new testEntities();
+             /*
+             var std = new Models.Student { Id = 1, Email = "test1@test.com", studentName = "STEFFY 1", studentSurName = "XYZ1" };
+             var pymts = new List<Models.Student_Payments>();
+             pymts.Add(new Models.Student_Payments { Id=1,Payment=100, date="1.1.2001"});
+             pymts.Add(new Models.Student_Payments { Id = 2, Payment = 102, date = "1.1.2001" });
+             pymts.Add(new Models.Student_Payments { Id = 3, Payment = 103, date = "1.1.2001" });
+             std.payments=pymts.ToArray();
+             */
+             testEntities ee = new testEntities();
             /*
             ee.Students.Add( new Student {
                 Id=1,
@@ -152,6 +153,7 @@ namespace WebApplication.Controllers
                   .ToList();
 
                 ViewBag.PaymentsList = context.Student_Payments
+                    .Where(b => b.StudentId == studentId)
                   .ToList();
 
             }
@@ -163,9 +165,9 @@ namespace WebApplication.Controllers
                         }
                         */
 
-            var pp = ee.Student_Payments;
-            ViewBag.ViewBag.PaymentsList = studentId;
-            return View(pp);
+            
+            ViewBag.studentId = studentId;
+            return View();
         }
 
 
