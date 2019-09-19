@@ -1,0 +1,70 @@
+@model IEnumerable<WebApplication.Models.Student_Payments>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Forms";
+    ViewBag.SubTitle = "General";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Forms/General/menu")
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+    <title>Dog List</title>
+</head>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">Horizontal Form</h3>
+            </div>            
+            @{Html.RenderAction("StudentCreateView");}
+        </div>
+        <div class="box box-warning">
+            <div class="box-body">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Ödemeler</h3>
+                    </div>
+                    <div class="box-body">
+                        <table class="table">
+                            <tr>
+                                <th></th>
+                                <th>Number</th>
+                                <th>Title</th>
+                                <th>Department</th>
+                            </tr>
+                                @foreach (var item in ViewBag.PaymentsList )
+                                {
+                                    string selectedRow = "";
+                        <tr class="@selectedRow">
+                            <td>
+                            </td>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.Payment
+                            </td>
+                            
+                            <td>
+                                
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                                }
+
+                        </table>
+                                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
