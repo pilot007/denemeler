@@ -1,0 +1,73 @@
+You can do it with ViewModels like how you passed data from your controller to view.
+
+Assume you have a viewmodel like this
+
+public class ReportViewModel
+{
+   public string Name { set;get;}
+}
+and in your GET Action,
+
+public ActionResult Report()
+{
+  return View(new ReportViewModel());
+}
+and your view must be strongly typed to ReportViewModel
+
+@model ReportViewModel
+@using(Html.BeginForm())
+{
+  Report NAme : @Html.TextBoxFor(s=>s.Name)
+  <input type="submit" value="Generate report" />
+}
+and in your HttpPost action method in your controller
+
+[HttpPost]
+public ActionResult Report(ReportViewModel model)
+{
+  //check for model.Name property value now
+  //to do : Return something
+}
+OR Simply, you can do this without the POCO classes (Viewmodels)
+
+@using(Html.BeginForm())
+{
+   <input type="text" name="reportName" />
+   <input type="submit" />
+}
+and in your HttpPost action, use a parameter with same name as the textbox name.
+
+[HttpPost]
+public ActionResult Report(string reportName)
+{
+  //check for reportName parameter value now
+  //to do : Return something
+}
+EDIT : As per the comment
+
+If you want to post to another controller, you may use this overload of the BeginForm method.
+
+@using(Html.BeginForm("Report","SomeOtherControllerName"))
+{
+   <input type="text" name="reportName" />
+   <input type="submit" />
+}
+Passing data from action method to view ?
+You can use the same view model, simply set the property values in your GET action method
+
+public ActionResult Report()
+{
+  var vm = new ReportViewModel();
+  vm.Name="SuperManReport";
+  return View(vm);
+}
+and in your view
+
+@model ReportViewModel
+<h2>@Model.Name</h2>
+<p>Can have input field with value set in action method</p>
+@using(Html.BeginForm())
+{
+  @Html.TextBoxFor(s=>s.Name)
+  <input type="submit" />
+}
