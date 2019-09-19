@@ -1,0 +1,123 @@
+﻿@model IEnumerable<WebApplication.Models.Student> 
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Dashboard v1";
+}
+
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Home/DashboardV1/menu")
+
+}
+
+@Styles.Render("~/AdminLTE/plugins/morris/css")
+@Styles.Render("~/AdminLTE/plugins/jvectormap/css")
+@Styles.Render("~/AdminLTE/plugins/datepicker/css")
+@Styles.Render("~/AdminLTE/plugins/daterangepicker/css")
+@Styles.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/css")
+@Styles.Render("~/AdminLTE/plugins/datatables/css")
+
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+        <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+        <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+        <title>Index</title>
+    </head>
+
+<div class="row">
+    <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3>150</h3>
+                <p>Aktif Ögrenci</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3>353</h3>
+                <p>Mezun Ögrenci</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3>..</h3>
+                <p>...</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-red">
+            <div class="inner">
+                <h3>..</h3>
+                <p>....</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <section class="col-lg-12 connectedSortable">
+
+        <div class="box box-primary">
+            <div class="box-footer clearfix no-border">
+                <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Ögrenciler</h3>
+            </div>
+            <div class="box-body">
+                @Html.Grid(Model).Columns(columns =>
+                   {
+                       columns.Add(model => model.Id).Titled("Link").Filterable(true).Sanitized(false).Encoded(false).
+                        RenderValueAs(model => Html.ActionLink(model.StudentName, "general", "forms", new { studentID = model.Id }, null).ToHtmlString());
+                       columns.Add(c => c.StudentName).Titled("StudentName").Filterable(true);
+                       columns.Add(c => c.StudentSurName).Titled("StudentSurName").Filterable(true);
+                       columns.Add(c => c.PhoneNumber).Titled("PhoneNumber");
+                   }).WithPaging(3).Sortable(true)
+            </div>
+        </div>
+
+
+
+    </section>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/plugins/jquery-ui/js")
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+
+    @Scripts.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/js")
+    @Scripts.Render("~/AdminLTE/plugins/sparkline/js")
+    @Scripts.Render("~/AdminLTE/plugins/jvectormap/js")
+    @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js")
+    @Scripts.Render("~/AdminLTE/plugins/knob/js")
+    @Scripts.Render("~/AdminLTE/plugins/raphael/js")
+    @Scripts.Render("~/AdminLTE/plugins/morris/js")
+    @Scripts.Render("~/AdminLTE/plugins/datepicker/js")
+    @Scripts.Render("~/Scripts/Home/DashboardV1")
+}

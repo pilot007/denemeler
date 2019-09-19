@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adres" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="256" />
+          <Property Name="Create" Type="datetime" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="256" />
+          <Property Name="StudentSurName" Type="nvarchar" MaxLength="256" />
+          <Property Name="StudentSchool" Type="nvarchar" MaxLength="256" />
+          <Property Name="StudentBirthDate" Type="nvarchar" MaxLength="256" />
+          <Property Name="StudentBirthPlace" Type="nvarchar" MaxLength="256" />
+          <Property Name="StudentExtraInfo" Type="nvarchar(max)" />
+          <Property Name="StudentPrice" Type="int" />
+          <Property Name="StudentRestPrice" Type="int" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="StudentPapier" Type="bit" />
+        </EntityType>
+        <EntityType Name="Student_Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" />
+          <Property Name="Create" Type="datetime" />
+          <Property Name="Payment" Type="int" />
+        </EntityType>
+        <!--Während der Generierung sind Fehler aufgetreten:
+Warnung 6013: Für Tabelle/Sicht 'test.dbo.Table_test' ist kein Primärschlüssel definiert, und es konnte kein gültiger Primärschlüssel abgeleitet werden. Diese Tabelle/Sicht wurde ausgeschlossen. Wenn Sie die Entität verwenden möchten, müssen Sie das Schema überprüfen, die richtigen Schlüssel hinzufügen und die Auskommentierung aufheben.
+        <EntityType Name="Table_test">
+          <Property Name="c1" Type="int" />
+          <Property Name="c2" Type="nvarchar" MaxLength="50" />
+          <Property Name="c3" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+        <EntityContainer Name="testModelStoreContainer">
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student_Payments" EntityType="Self.Student_Payments" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="testEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Students" EntityType="testModel.Student" />
+          <EntitySet Name="Student_Payments" EntityType="testModel.Student_Payments" />
+        </EntityContainer>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Create" Type="DateTime" Precision="3" />
+          <Property Name="StudentName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StudentSurName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StudentSchool" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StudentBirthDate" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StudentBirthPlace" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StudentExtraInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudentPrice" Type="Int32" />
+          <Property Name="StudentRestPrice" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="StudentPapier" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Student_Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" />
+          <Property Name="Create" Type="DateTime" Precision="3" />
+          <Property Name="Payment" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="testModelStoreContainer" CdmEntityContainer="testEntities">
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="testModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="StudentPapier" ColumnName="StudentPapier" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="StudentRestPrice" ColumnName="StudentRestPrice" />
+                <ScalarProperty Name="StudentPrice" ColumnName="StudentPrice" />
+                <ScalarProperty Name="StudentExtraInfo" ColumnName="StudentExtraInfo" />
+                <ScalarProperty Name="StudentBirthPlace" ColumnName="StudentBirthPlace" />
+                <ScalarProperty Name="StudentBirthDate" ColumnName="StudentBirthDate" />
+                <ScalarProperty Name="StudentSchool" ColumnName="StudentSchool" />
+                <ScalarProperty Name="StudentSurName" ColumnName="StudentSurName" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="Create" ColumnName="Create" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_Payments">
+            <EntityTypeMapping TypeName="testModel.Student_Payments">
+              <MappingFragment StoreEntitySet="Student_Payments">
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Create" ColumnName="Create" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
