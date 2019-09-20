@@ -1,0 +1,24 @@
+﻿@model WebApplication.Models.Student_Payments
+
+<div class="col-md-12">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Ödeme Islemi</h3>
+        </div>
+        @using (Html.BeginForm("save_payment", "Forms", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+        {
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Ödenen tutar</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Payment, new { @class = "form-control", type = "text", placeholder = "Payment" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="box-footer">                
+                <button type="submit" class="btn btn-info pull-right">Kaydet</button>
+            </div>
+        }
+    </div>
+</div>

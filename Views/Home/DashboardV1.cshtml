@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<WebApplication.Models.Student> 
 @using GridMvc.Html
 @{
-    ViewBag.Title = "Dashboard v1";
+    ViewBag.Title = "Ögrenci Dashboard";
 }
 
-}
 
 @section Menu {
     @Scripts.Render("~/Scripts/Home/DashboardV1/menu")
@@ -77,13 +76,6 @@
 </div>
 <div class="row">
     <section class="col-lg-12 connectedSortable">
-
-        <div class="box box-primary">
-            <div class="box-footer clearfix no-border">
-                <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
-            </div>
-        </div>
-
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Ögrenciler</h3>
@@ -93,9 +85,11 @@
                    {
                        columns.Add(model => model.Id).Titled("Link").Filterable(true).Sanitized(false).Encoded(false).
                         RenderValueAs(model => Html.ActionLink(model.StudentName, "general", "forms", new { studentID = model.Id }, null).ToHtmlString());
-                       columns.Add(c => c.StudentName).Titled("StudentName").Filterable(true);
-                       columns.Add(c => c.StudentSurName).Titled("StudentSurName").Filterable(true);
-                       columns.Add(c => c.PhoneNumber).Titled("PhoneNumber");
+                       columns.Add(c => c.StudentName).Titled("Ögrenci Adi").Filterable(true);
+                       columns.Add(c => c.StudentSurName).Titled("Ögrenci Soayadi").Filterable(true);
+                       columns.Add(c => c.PhoneNumber).Titled("Telefob");
+                       columns.Add(c => c.Email).Titled("Email");
+                       columns.Add(c => c.Active).Titled("Aktif/Pasif");
                    }).WithPaging(3).Sortable(true)
             </div>
         </div>

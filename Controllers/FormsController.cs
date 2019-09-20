@@ -25,6 +25,14 @@ namespace WebApplication.Controllers
             }
             return PartialView("StudentCreateView", sx);
         }
+
+        public PartialViewResult StudentPaymentView()
+        {
+            Student_Payments sx = new Student_Payments();
+            return PartialView("StudentPaymentView",sx);
+        }
+
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> save(Student model, string returnUrl)
@@ -51,6 +59,36 @@ namespace WebApplication.Controllers
 
             var pp = ee.Student_Payments;            
             return View("General", pp);
+        }
+
+
+        public async Task<ActionResult> save_payment(Student_Payments model, string returnUrl)
+        {
+            int studentId= int.Parse(Session["studentId"].ToString());
+
+            model.StudentId = studentId;
+            //check for reportName parameter value now
+            //to do : Return something
+            testEntities ee = new testEntities();
+            if (model.Id > 0)
+            {
+                ee.Entry(model).State = EntityState.Modified;
+            }
+            else
+            {
+                ee.Student_Payments.Add(model);
+            }
+            ee.SaveChanges();
+
+
+            using (var context = new testEntities())
+            {
+                ViewBag.PaymentsList = context.Student_Payments
+                  .Where(b => b.StudentId  == studentId)
+                  .ToList();
+            }
+            
+            return View("General", ViewBag.PaymentsList);
         }
 
         public ActionResult General(int studentId )

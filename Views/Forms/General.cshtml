@@ -22,49 +22,52 @@
         <div class="box box-info">
             <div class="box-header with-border">
                 <h3 class="box-title">Horizontal Form</h3>
-            </div>            
+            </div>
             @{Html.RenderAction("StudentCreateView");}
         </div>
         <div class="box box-warning">
             <div class="box-body">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Ödemeler</h3>
+                        <h3 class="box-title">Ögrencinin Önceki Ödemeleri</h3>
                     </div>
                     <div class="box-body">
                         <table class="table">
                             <tr>
                                 <th></th>
-                                <th>Number</th>
-                                <th>Title</th>
-                                <th>Department</th>
+                                <th>SiraNo</th>
+                                <th>Ödenen</th>
+                                <th>Tarih</th>
                             </tr>
-                                @foreach (var item in ViewBag.PaymentsList )
-                                {
-                                    string selectedRow = "";
-                        <tr class="@selectedRow">
-                            <td>
-                            </td>
-                            <td>
-                                @item.Id
-                            </td>
-                            <td>
-                                @item.Payment
-                            </td>
-                            
-                            <td>
-                                
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                                }
+                            @foreach (var item in ViewBag.PaymentsList)
+                            {
+                                string selectedRow = "";
+                                <tr class="@selectedRow">
+                                    <td>
+                                    </td>
+                                    <td>
+                                        @item.Id
+                                    </td>
+                                    <td>
+                                        @item.Payment
+                                    </td>
+
+                                    <td>
+                                        @item.Create
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            }
 
                         </table>
-                                                
+
                     </div>
                 </div>
             </div>
         </div>
+
+        @{Html.RenderAction("StudentPaymentView");}
+
     </div>
 </div>
