@@ -4,26 +4,52 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="studentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'student.dbo.setting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="setting">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="value_name" />
+            <PropertyRef Name="value_desc" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="value_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="value_desc" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Adres" Type="nvarchar(max)" />
-          <Property Name="Email" Type="nvarchar" MaxLength="256" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="256" />
-          <Property Name="Create" Type="datetime" />
           <Property Name="StudentName" Type="nvarchar" MaxLength="256" />
           <Property Name="StudentSurName" Type="nvarchar" MaxLength="256" />
+          <Property Name="mr_mrs" Type="nvarchar" MaxLength="256" />
           <Property Name="StudentSchool" Type="nvarchar" MaxLength="256" />
           <Property Name="StudentBirthDate" Type="nvarchar" MaxLength="256" />
           <Property Name="StudentBirthPlace" Type="nvarchar" MaxLength="256" />
           <Property Name="StudentExtraInfo" Type="nvarchar(max)" />
+          <Property Name="Adres" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="256" />
+          <Property Name="CreateDate" Type="datetime" />
           <Property Name="StudentPrice" Type="int" />
           <Property Name="StudentRestPrice" Type="int" />
-          <Property Name="Active" Type="bit" />
-          <Property Name="StudentPapier" Type="bit" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="StudentPapier" Type="bit" Nullable="false" />
+          <Property Name="AdresPLZ" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdresCity" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="student_files">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="studentId" Type="int" Nullable="false" />
+          <Property Name="filepath" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="create_date" Type="date" />
+          <Property Name="fileName" Type="nvarchar" MaxLength="50" />
+          <Property Name="fileNameOld" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Student_Payments">
           <Key>
@@ -31,91 +57,148 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentId" Type="int" />
-          <Property Name="Create" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
           <Property Name="Payment" Type="int" />
+          <Property Name="PaymentDesc" Type="nvarchar" MaxLength="255" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Während der Generierung sind Fehler aufgetreten:
-Warnung 6013: Für Tabelle/Sicht 'test.dbo.Table_test' ist kein Primärschlüssel definiert, und es konnte kein gültiger Primärschlüssel abgeleitet werden. Diese Tabelle/Sicht wurde ausgeschlossen. Wenn Sie die Entität verwenden möchten, müssen Sie das Schema überprüfen, die richtigen Schlüssel hinzufügen und die Auskommentierung aufheben.
-        <EntityType Name="Table_test">
-          <Property Name="c1" Type="int" />
-          <Property Name="c2" Type="nvarchar" MaxLength="50" />
-          <Property Name="c3" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
-        <EntityContainer Name="testModelStoreContainer">
+        <EntityContainer Name="studentModelStoreContainer">
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student_files" EntityType="Self.student_files" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student_Payments" EntityType="Self.Student_Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="setting" EntityType="Self.setting" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [setting].[id] AS [id], 
+    [setting].[value_name] AS [value_name], 
+    [setting].[value_desc] AS [value_desc]
+    FROM [dbo].[setting] AS [setting]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="testEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Students" EntityType="testModel.Student" />
-          <EntitySet Name="Student_Payments" EntityType="testModel.Student_Payments" />
+      <Schema Namespace="studentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="studentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Student_Payments" EntityType="studentModel.Student_Payments" />
+          <EntitySet Name="Students" EntityType="studentModel.Student" />
+          <EntitySet Name="settings" EntityType="studentModel.setting" />
+          <EntitySet Name="student_files" EntityType="studentModel.student_files" />
         </EntityContainer>
-        <EntityType Name="Student">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Create" Type="DateTime" Precision="3" />
-          <Property Name="StudentName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="StudentSurName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="StudentSchool" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="StudentBirthDate" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="StudentBirthPlace" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="StudentExtraInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="StudentPrice" Type="Int32" />
-          <Property Name="StudentRestPrice" Type="Int32" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="StudentPapier" Type="Boolean" />
-        </EntityType>
         <EntityType Name="Student_Payments">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentId" Type="Int32" />
-          <Property Name="Create" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="Payment" Type="Int32" />
+          <Property Name="PaymentDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StudentSurName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="mr_mrs" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StudentSchool" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StudentBirthDate" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StudentBirthPlace" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StudentExtraInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="StudentPrice" Type="Int32" />
+          <Property Name="StudentRestPrice" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="StudentPapier" Type="Boolean" Nullable="false" />
+          <Property Name="AdresPLZ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdresCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="setting">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="value_name" />
+            <PropertyRef Name="value_desc" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="value_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="value_desc" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="student_files">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studentId" Type="Int32" Nullable="false" />
+          <Property Name="filepath" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="create_date" Type="DateTime" Precision="0" />
+          <Property Name="fileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fileNameOld" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="testModelStoreContainer" CdmEntityContainer="testEntities">
-          <EntitySetMapping Name="Students">
-            <EntityTypeMapping TypeName="testModel.Student">
-              <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="StudentPapier" ColumnName="StudentPapier" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="StudentRestPrice" ColumnName="StudentRestPrice" />
-                <ScalarProperty Name="StudentPrice" ColumnName="StudentPrice" />
-                <ScalarProperty Name="StudentExtraInfo" ColumnName="StudentExtraInfo" />
-                <ScalarProperty Name="StudentBirthPlace" ColumnName="StudentBirthPlace" />
-                <ScalarProperty Name="StudentBirthDate" ColumnName="StudentBirthDate" />
-                <ScalarProperty Name="StudentSchool" ColumnName="StudentSchool" />
-                <ScalarProperty Name="StudentSurName" ColumnName="StudentSurName" />
-                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
-                <ScalarProperty Name="Create" ColumnName="Create" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Adres" ColumnName="Adres" />
+        <EntityContainerMapping StorageEntityContainer="studentModelStoreContainer" CdmEntityContainer="studentEntities">
+          <EntitySetMapping Name="Student_Payments">
+            <EntityTypeMapping TypeName="studentModel.Student_Payments">
+              <MappingFragment StoreEntitySet="Student_Payments">
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="PaymentDesc" ColumnName="PaymentDesc" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Student_Payments">
-            <EntityTypeMapping TypeName="testModel.Student_Payments">
-              <MappingFragment StoreEntitySet="Student_Payments">
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
-                <ScalarProperty Name="Create" ColumnName="Create" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="studentModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="AdresCity" ColumnName="AdresCity" />
+                <ScalarProperty Name="AdresPLZ" ColumnName="AdresPLZ" />
+                <ScalarProperty Name="StudentPapier" ColumnName="StudentPapier" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="StudentRestPrice" ColumnName="StudentRestPrice" />
+                <ScalarProperty Name="StudentPrice" ColumnName="StudentPrice" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="StudentExtraInfo" ColumnName="StudentExtraInfo" />
+                <ScalarProperty Name="StudentBirthPlace" ColumnName="StudentBirthPlace" />
+                <ScalarProperty Name="StudentBirthDate" ColumnName="StudentBirthDate" />
+                <ScalarProperty Name="StudentSchool" ColumnName="StudentSchool" />
+                <ScalarProperty Name="mr_mrs" ColumnName="mr_mrs" />
+                <ScalarProperty Name="StudentSurName" ColumnName="StudentSurName" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="settings">
+            <EntityTypeMapping TypeName="studentModel.setting">
+              <MappingFragment StoreEntitySet="setting">
+                <ScalarProperty Name="value_desc" ColumnName="value_desc" />
+                <ScalarProperty Name="value_name" ColumnName="value_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="student_files">
+            <EntityTypeMapping TypeName="studentModel.student_files">
+              <MappingFragment StoreEntitySet="student_files">
+                <ScalarProperty Name="fileNameOld" ColumnName="fileNameOld" />
+                <ScalarProperty Name="fileName" ColumnName="fileName" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="filepath" ColumnName="filepath" />
+                <ScalarProperty Name="studentId" ColumnName="studentId" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -136,7 +219,7 @@ Warnung 6013: Für Tabelle/Sicht 'test.dbo.Table_test' ist kein Primärschlüsse
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

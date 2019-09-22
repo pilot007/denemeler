@@ -46,13 +46,6 @@ namespace WebApplication.Models
         public string Email { get; set; }
     }
 
-
-    public class StudentViewModel
-    {
-        public Student student { get; set; }
-        public IEnumerable<Student_Payments> Payments { get; set; }
-    }
-
     public class LoginViewModel
     {
         [Required]
