@@ -2,7 +2,7 @@
 @using GridMvc.Html
 @{
     ViewBag.Title = "Forms";
-    ViewBag.SubTitle = "General";
+    ViewBag.SubTitle = "Öğrenci Kayıt";
 }
 
 @section Menu {
@@ -20,9 +20,6 @@
 
     <div class="col-md-12">
         <div class="box box-info">
-            <div class="box-header with-border">
-                <h3 class="box-title">Horizontal Form</h3>
-            </div>
             @{Html.RenderAction("StudentCreateView");}
         </div>
         <div class="box box-warning">
@@ -42,22 +39,23 @@
                             @foreach (var item in ViewBag.PaymentsList)
                             {
                                 string selectedRow = "";
-                                <tr class="@selectedRow">
-                                    <td>
-                                    </td>
-                                    <td>
-                                        @item.Id
-                                    </td>
-                                    <td>
-                                        @item.Payment
-                                    </td>
+                        <tr class="@selectedRow">
+                            <td></td>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.Payment
+                            </td>
 
-                                    <td>
-                                        @item.Create
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
+                            <td>
+                                @item.PaymentDesc
+                            </td>
+                            <td>
+                                @item.CreateDate
+                            </td>
+                            <td></td>
+                        </tr>
                             }
 
                         </table>
@@ -69,5 +67,9 @@
 
         @{Html.RenderAction("StudentPaymentView");}
 
+        @{Html.RenderAction("studentFileListView");}
+
+        @{Html.RenderPartial("studentFileUploadView");}
+        
     </div>
 </div>

@@ -1,0 +1,272 @@
+﻿<html xmlns:v="urn:schemas-microsoft-com:vml"
+      xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:w="urn:schemas-microsoft-com:office:word"
+      xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"
+      xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+      xmlns:mv="http://macVmlSchemaUri" xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=macintosh">
+</head>
+
+<body>
+
+    <div>
+
+        <center>
+            <p>
+                <span style='font-family:Arial;font-size:16.0pt;'><o:p>Bildungsakademie München e.V. </o:p></span>
+            </p>
+        </center>
+
+        <p class=MsoNormal>
+            <span style='font-family:Arial;color:red'>@ViewBag.studentName  @ViewBag.studentSurName<o:p></o:p></span>
+        </p>
+
+        <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt'>
+            <span style='font-family:Arial;color:red'>
+                @ViewBag.studentAdres
+            </span>
+        </p>
+
+        <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt'>
+            <span style='font-family:Arial;color:red'>@ViewBag.studentAdresPLZ  @ViewBag.studentAdresCity</span><span style='font-family:Arial'>
+            </span>
+        </p>
+
+        <p class=MsoNormal align=right style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:right;line-height:normal'>
+            <b>
+                <span style='font-family:Arial'>
+                    Rechnung Nr. <span>&nbsp;&nbsp;&nbsp;</span><span style='color:red'>BG @ViewBag.studentJahr1-@ViewBag.studentId</span>
+                </span>
+            </b><span style='font-family:Arial'><o:p></o:p></span>
+        </p>
+
+        <p class=MsoNormal align=right style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:right;line-height:normal'>
+            <b>
+                <span style='font-family:Arial'>
+                    Datum...........:<span>&nbsp;&nbsp;&nbsp;&nbsp;</span> <span style='color:red'>@ViewBag.studentDate</span><o:p></o:p>
+                </span>
+            </b>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle style='text-align:justify;text-justify:inter-ideograph'>
+            <b><span style='font-family:Arial'>Gebührenrechnung<o:p></o:p></span></b>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle style='text-align:justify;text-justify:inter-ideograph'>
+            <b><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></b>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle style='text-align:justify;text-justify:inter-ideograph'>
+            <span style='font-family:Arial'>
+                Sehr geehrter <span style='color:red'>@ViewBag.mr @ViewBag.studentSurName</span>,<o:p></o:p>
+            </span>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle style='text-align:justify;text-justify:inter-ideograph'>
+            <span style='font-family:Arial'><o:p>&nbsp;</o:p></span>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle style='text-align:justify;text-justify:inter-ideograph'>
+            <span style='font-family:Arial'>
+                im Folgenden erhalten
+                Sie eine Übersicht der Gebühren für den AÖL / YÖS Vorbereitungskurs und
+                Prüfungen<span>&nbsp; </span>für das Schuljahr <span style='color:red'>@ViewBag.studentJahr</span>:<o:p></o:p>
+            </span>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle style='text-align:justify;text-justify:inter-ideograph'>
+            <b>
+                <span style='font-family:Arial'>
+                    Gesamtbetrag für das Schuljahr <span style='color:red'>
+                        @ViewBag.studentJahr
+                        (Oktober @ViewBag.studentJahr1&#8211;Juni @ViewBag.studentJahr2)<span>&nbsp; </span>@ViewBag.StudentPrice
+                        €
+                    </span><o:p></o:p>
+                </span>
+            </b>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle>
+            <b>
+                <span style='font-family:Arial'>
+                    bei sofortiger Zahlung
+                    abzüglich Rabatt von<span style='color:red'>
+                        @ViewBag.StudentPriceDiscount €<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span>&nbsp;&nbsp;&nbsp;</span><span'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            @ViewBag.StudentPricerest €
+            </span><o:p></o:p>
+            </span>
+            </b>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle style='text-align:justify;text-justify:inter-ideograph'>
+            <span style='font-family:Arial'>
+                Die Anmeldung erfolgt
+                verbindlich für die Mindestlaufzeit von einem Schuljahr. Das Ende der
+                Mindestlaufzeit richtet sich nach dem Zeitpunkt der letzten abzulegenden
+                Prüfung.
+            </span><span> </span><span style='font-family:Arial'>
+                Für versäumten
+                Unterricht gibt es grundsätzlich keine Kostenminderung oder -rückerstattung.<o:p></o:p>
+            </span>
+        </p>
+        <p class=MsoNormal>
+            <span style='font-family:Arial
+'>
+                Der Betrag ist zahlbar sofort in einer Summe <span style='color:red'>
+                @ViewBag.StudentPricerest €,
+                </span> hilfsweise in <span style='color:red'>8</span> monatlichen Raten je 
+                <span style='color:red'>@ViewBag.StudentPriceRate €,</span> beginnend am <span style='color:red'>01.11.@ViewBag.studentJahr1</span>,
+                jeweils zum 1. jeden Monats, letzte Rate <span style='color:red'>@ViewBag.StudentPriceRate €</span>
+                zum <span style='color:red'>01.06.@ViewBag.studentJahr2</span>. <span class=GramE>
+                    Die Zahlungen<span>&nbsp;</span>überweisen<span>&nbsp;</span>Sie bitte an die Bankverbindung der <span>Bildungsakademie München e.V.</span>
+                </span>
+            </span>
+            <span style='font-family:Arial'> </span><span style='font-family:Arial'><o:p></o:p></span>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle style='text-align:justify;text-justify:inter-ideograph'>
+            <span style='font-family:Arial'>
+                Bei Zahlungsverzug ist
+                der gesamte Betrag sofort zur Zahlung fällig.<o:p></o:p>
+            </span>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle style='text-align:justify;text-justify:inter-ideograph'>
+            <span style='font-family:Arial'><o:p>&nbsp;</o:p></span>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle style='text-align:justify;text-justify:inter-ideograph'>
+            <span style='font-family:Arial'>
+                Bildungsakademie München
+                e.V.<o:p></o:p>
+            </span>
+        </p>
+
+        <p class=MsoNormal>
+            <span style='font-family:Arial
+'>Vorstandvorsitzender<o:p></o:p></span>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle style='text-align:justify;text-justify:inter-ideograph'>
+            <span style='font-family:Arial'>
+                Dipl. -Ing. Levent
+                Karadag
+            </span><b>
+                <span><o:p></o:p></span>
+            </b>
+        </p>
+
+        <p class=MsoNormalCxSpMiddle style='text-align:justify;text-justify:inter-ideograph'>
+            <b>
+                <span style='font-size:11.0pt;line-height:105%;font-family:"Sans","serif"'>
+                    BAP<span>&nbsp; </span>AÖL
+                    Prüfungstermine Schuljahr
+                </span>
+            </b><b>
+                <span style='font-size:11.0pt;
+line-height:105%;font-family:"Sans","serif"'>@ViewBag.studentJahr</span>
+            </b><b>
+                <span style='font-size:11.0pt;line-height:105%;font-family:"Sans","serif"'><o:p></o:p></span>
+            </b>
+        </p>
+
+        <p class=MsoNormalCxSpLast style='text-align:justify;text-justify:inter-ideograph'>
+            <b>
+                <span>
+                    @ViewBag.examdate<o:p></o:p>
+                </span>
+            </b>
+        </p>
+
+        <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width=652
+               style='margin-left:14.2pt;border-collapse:collapse'>
+            <tr>
+                <td width=209 valign=top style='width:208.5pt;border:solid #000001 1.0pt;
+  border-right:none:solid #000001 .25pt;background:
+  white;padding:2.75pt 2.75pt 2.75pt 2.7pt;height:81.35pt'>
+                    <p>
+                        <b>
+                            <span style='font-size:11.0pt;font-family:Arial;'>Bildungsakademie München e.V.</span>
+                        </b><span lang=DE><o:p></o:p></span>
+                    </p>
+                    <p class=MsoFooter>
+                        <b>
+                            <span lang=TR style='font-size:11.0pt;font-family:Arial'>Anschrift:</span>
+                        </b><span lang=TR style='font-size:
+  11.0pt;font-family:Arial'>
+                            IG Karlstr.48, 80333
+                            München<span>&nbsp; </span>
+                        </span><span><o:p></o:p></span>
+                    </p>
+                    <p class=MsoFooter>
+                        <b>
+                            <span lang=TR style='font-size:11.0pt;font-family:Arial'>Tel.:</span>
+                        </b><span lang=TR style='font-size:11.0pt;
+  font-family:Arial'>0179-673 8134</span><span lang=DE><o:p></o:p></span>
+                    </p>
+                    <p class=MsoFooter>
+                        <b>
+                            <span lang=TR style='font-size:11.0pt;font-family:Arial'>Hompage:</span>
+                        </b><span lang=TR style='font-size:11.0pt;
+  font-family:Arial'>
+                            www.yek-akademi.com<span>&nbsp;</span>
+                        </span><span><o:p></o:p></span>
+                    </p>
+                    <p class=MsoFooter>
+                        <b>
+                            <span lang=TR style='font-size:11.0pt;font-family:Arial;'>E-Mail:</span>
+                        </b><span style='font-size:11.0pt;
+  font-family:Arial'>info@yek-akademi.com</span>
+                    </p>
+                </td>
+                <td width=244 valign=top style='width:243.6pt;border:solid #000001 1.0pt;
+  mso-border-alt:solid #000001 .25pt;background:white;padding:2.75pt 2.75pt 2.75pt 2.7pt;
+  height:81.35pt'>
+                    <p class=MsoFooter>
+                        <b>
+                            <span lang=TR style='font-size:11.0pt;font-family:Arial'>Kontoinhaber:</span>
+                        </b><span lang=TR
+                                  style='font-size:11.0pt;font-family:Arial'>Bildungsakademie München e.V.<o:p></o:p></span>
+                    </p>
+                    <p class=MsoFooter>
+                        <b>
+                            <span lang=TR style='font-size:11.0pt;font-family:Arial'>IBAN:</span>
+                        </b><span lang=TR style='font-size:11.0pt;
+  font-family:Arial'>
+                            DE49 7007
+                            0024 0505 8482 00<b><o:p></o:p></b>
+                        </span>
+                    </p>
+                    <p class=MsoFooter>
+                        <b>
+                            <span lang=TR style='font-size:11.0pt;font-family:Arial'>BIC:</span>
+                        </b><span lang=TR style='font-size:11.0pt;font-family:Arial'>
+                            DEUTDEDBMUC<b>
+                                <o:p></o:p>
+                            </b>
+                        </span>
+                    </p>
+                    <p class=MsoFooter>
+                        <b>
+                            <span lang=TR style='font-size:11.0pt;font-family:Arial'>Amtsgericht München<o:p></o:p></span>
+                        </b>
+                    </p>
+                    <p class=MsoFooter>
+                        <b>
+                            <span lang=TR style='font-size:11.0pt;font-family:Arial'>Registernummer: VR 204805<o:p></o:p></span>
+                        </b>
+                    </p>
+                    <p class=MsoFooter><span><o:p>&nbsp;</o:p></span></p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>

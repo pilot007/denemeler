@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebApplication.Models.student_files>
+@using GridMvc.Html
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+    <title>Index</title>
+</head>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+
+            <div class="box-header">
+                <h3 class="box-title">Öğrencinin Dosyaları</h3>
+            </div>
+            <div class="box-body">
+                @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.id).Titled("Title").Filterable(true);
+    columns.Add(c => c.fileNameOld).Titled("Dosya Adi").Filterable(true);
+    columns.Add(c => c.create_date).Titled("Tarihi").Filterable(true);
+}).WithPaging(30).Sortable(true)
+            </div>
+        </div>
+    </div>
+</div>

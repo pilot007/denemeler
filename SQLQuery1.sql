@@ -1,36 +1,26 @@
-﻿DROP TABLE [dbo].[Student] 
-DROP TABLE [dbo].[Student_Payments]
+USE [student]
+GO
 
-CREATE TABLE [dbo].[Student] (
-    [Id]                   NVARCHAR (128) NOT NULL,
-    [Adres]				   NVARCHAR (MAX) NULL,
-    [Email]                NVARCHAR (256) NULL,
-    [PhoneNumber]          NVARCHAR (256) NULL,
-    [Create]			   DATETIME       NULL,
-	[CreatedBy]			   NVARCHAR (256) NOT NULL,
-    [StudentName]          NVARCHAR (256) NOT NULL,
-	[StudentSurName]       NVARCHAR (256) NOT NULL,
-	[StudentSchool]        NVARCHAR (256) NOT NULL,
-	[StudentBirthDate]     NVARCHAR (256),
-	[StudentBirthPlace]    NVARCHAR (256),
-	[StudentExtraInfo]     NVARCHAR (MAX),
-	[StudentPrice]		   INT,
-	[StudentRestPrice]		   INT,
-    [Active]			   BIT            NOT NULL,
-    [StudentPapier]        BIT            NOT NULL,
-    CONSTRAINT [PK_dbo.Student] PRIMARY KEY CLUSTERED ([Id] ASC)
-);
+/****** Object:  Table [dbo].[Student_Payments]    Script Date: 9/22/2019 11:30:48 PM ******/
+SET ANSI_NULLS ON
+GO
 
+SET QUOTED_IDENTIFIER ON
+GO
 
-CREATE UNIQUE NONCLUSTERED INDEX [StudentIndex]
-    ON [dbo].[Student]([ID] ASC);
+CREATE TABLE [dbo].[Student_Payments](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[StudentId] [int] NULL,
+	[CreateDate] [datetime] NULL CONSTRAINT [DF_Student_Payments_Create]  DEFAULT (getdate()),
+	[Payment] [int] NULL,
+	[PaymentDesc] [nvarchar](255) NULL,
+	[isDeleted] [bit] NOT NULL CONSTRAINT [DF_Student_Payments_isDeleted]  DEFAULT ((0)),
+ CONSTRAINT [PK__Student___3214EC07EB347E07] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
 
 
-CREATE TABLE [dbo].[Student_Payments] (
-    [Id]                   NVARCHAR (128) NOT NULL,
-    [StudentId]            NVARCHAR (128) NOT NULL,
-    [Create]			   DATETIME  NOT NULL,
-	[Payment]			   INT NOT NULL,
-	[CreatedBy]			   NVARCHAR (256) NOT NULL,
-    CONSTRAINT [PK_dbo.Student_Payments] PRIMARY KEY CLUSTERED ([Id] ASC)
-);
