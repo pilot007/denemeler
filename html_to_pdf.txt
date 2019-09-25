@@ -1,0 +1,11 @@
+
+https://www.c-sharpcorner.com/article/create-a-pdf-file-and-download-using-Asp-Net-mvc/
+
+https://wouterdekort.com/2012/10/12/rendering-an-asp-net-mvc-view-to-a-string-in-a-web-api-controller/
+
+https://www.codeproject.com/Articles/260470/PDF-reporting-using-ASP-NET-MVC3
+
+https://www.codeproject.com/Articles/66948/Rendering-PDF-views-in-ASP-MVC-using-iTextSharp.aspx
+
+https://www.advaiya.com/blog/how-to-generate-pdf-in-asp-net-mvc/
+
