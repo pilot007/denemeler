@@ -1,3 +1,4 @@
+https://stackoverflow.com/questions/779430/asp-net-mvc-how-to-get-view-to-generate-pdf
 
 https://www.c-sharpcorner.com/article/create-a-pdf-file-and-download-using-Asp-Net-mvc/
 
